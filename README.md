@@ -280,3 +280,66 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 ```
 
 --------
+
+
+## DB
+
+### Entity
+
+```kt
+@Entity
+data class User(
+    val username: String,
+
+    @ColumnInfo(name = "password_hash")
+    val passwordHash: Int,
+
+    val info: String
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}
+```
+
+### Dao
+
+```kt
+@Dao
+interface UserDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUser(user: User): Long
+
+    @Query("SELECT * FROM user WHERE username = :username")
+    suspend fun getUser(username: String): User
+
+    @Query("DELETE FROM user WHERE id= :id")
+    suspend fun deleteUser(id: Long)
+}
+```
+
+### Database
+
+```kt
+@Database(entities = [User::class], version = 1)
+abstract class UserDatabase: RoomDatabase() {
+    abstract fun userDao(): UserDao
+
+    companion object {
+        @Volatile private var instance: UserDatabase? = null
+        private val LOCK = Any()
+
+        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
+            instance ?: buildDatabase(context).also {
+                instance = it
+            }
+        }
+
+        private fun buildDatabase(context: Context) = Room.databaseBuilder(
+            context.applicationContext,
+            UserDatabase::class.java,
+            "userdatabase"
+        ).build()
+    }
+}
+```
