@@ -1,7 +1,9 @@
 # AndroidCoroutinesRoom
 
 ## Signup
+
 <img width="558" alt="スクリーンショット 2022-08-16 21 33 57" src="https://user-images.githubusercontent.com/47273077/184880648-c4915828-56b5-4a9a-bf3e-e22a5a540c28.png">
+
 ### Fragment
 
 ```kt
@@ -89,7 +91,10 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
 }
 ```
 
+--------
+
 ## Main
+
 <img width="558" alt="スクリーンショット 2022-08-16 21 34 35" src="https://user-images.githubusercontent.com/47273077/184880758-fb36008a-29a9-45c6-abac-cde83a17342b.png">
 
 ### Fragment
@@ -185,7 +190,9 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
 }
 ```
 
+--------
 ## Login
+
 <img width="558" alt="スクリーンショット 2022-08-16 21 35 10" src="https://user-images.githubusercontent.com/47273077/184880867-37756651-468b-4f3c-95fd-0bc45c60add2.png">
 
 ### Fragment
@@ -271,3 +278,5 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 }
 ```
+
+--------
